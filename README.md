@@ -1,4 +1,4 @@
-# k6-grafana
+# [k6-grafana](https://k6.io/)
 
 k6 and Grafana
 
@@ -15,8 +15,18 @@ Example:
 "95% of the requests took less than 0.9 seconds."
 "99% of the requests took less than 2.5 seconds."
 ```
+5) Scalability:
+```
+Vertical scaling (scale-up) -> Add more RAM memory, storage or use better CPU
+Horizontal scaling (scale-out) -> Adding more systems to handle load, mostly with same config
+```
 
 ## Types of Performance Testing
+
+1) Load Test: Simulating multiple users accesing the system concurrently
+2) Stress Test: Push the system to its breaking point
+3) Spike Test: Sudden increase and decrease of load
+4) Smoke Test: System is up and running and script we have written is also working. Checks basic functionality.
 
 ## How to run tests
 
