@@ -23,14 +23,18 @@ Horizontal scaling (scale-out) -> Adding more systems to handle load, mostly wit
 
 ## Types of Performance Testing
 
-1) Load Test: Simulating multiple users accesing the system concurrently. Number of users accessing the system in
+1) Smoke Test: System is up and running and script we have written is also working. Checks basic system functionality.
+2) Load Test: Simulating multiple users accesing the system concurrently. Number of users accessing the system in
 busiest time of the day. Tests could last for 30 mins or more depending on requirements. Gradual increase users and
 decrease as test end time approaches.
 Ramp-up can be 10% of total test duration. Same with Ramp-down. Remaining time for Steady-load.
-2) Stress Test: Push the system to its breaking point. Higher than Load Tests. Heavier than usual loads.
+3) Stress Test: Push the system to its breaking point. Higher than Load Tests. Heavier than usual loads.
 Increased VUs, mimicking real world rush hours or surge situations.
-3) Spike Test: Sudden increase and decrease of load
-4) Smoke Test: System is up and running and script we have written is also working. Checks basic functionality.
+4) Spike Test: Sudden increase and decrease of load. More load than Stress Test.
+5) Breakpoint Test: Determines point at which system breaks. Gradually keep increasing the load and observe when system
+breaks. Helps with capacity planning.
+6) Soak/Endurance Test: Similar to Load Test but executed for longer durations (Serveral hours to days)
+to observe system behavior over extended period of time.
 
 ## How to run tests
 
@@ -38,3 +42,10 @@ To run a basic test, execute below command.
 
 ***k6 run ./basics/dev-match-get-api.js***
 
+## More links to refer
+
+https://grafana.com/load-testing/types-of-load-testing/
+
+https://www.globalapptesting.com/blog/performance-testing-types
+
+https://www.browserstack.com/guide/types-of-performance-test

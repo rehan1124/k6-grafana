@@ -3,14 +3,13 @@ import { sleep } from 'k6';
 import { BASE_URL, GET_PROFILES_EP } from '../urls-eps.js'
 
 /**
- * Running tests to check how system responds on busy time of the day when multiple users are accessing it.
- * Test can run for 30-60 mins or more.
- * Spread across multiple stages. Ramp-up of 10% test duration and Ramp-down of 10% test duration.
- * Remaining time for test execution (Steady-load).
+ * Running tests in similar fashion as that of Load Test with multiple stages btu for extended time durations.
+ * Checks system performance running for longer period of time.
+ * Disk space usage, memory leaks, database getting populated and crashing, server crashes due to high usage,
+ * resource depletion etc.
  * 
- * Example: An e-commerce website might simulate 10,000 concurrent users browsing products and adding items to
- * their carts during a normal business day to ensure the site handles the expected traffic smoothly and
- * meets response time requirements. 
+ * Example: An email server is run at its average expected load for 48 hours continuously to ensure it doesn't
+ * develop memory leaks, which would cause performance to slow down gradually over time and eventually crash the system. 
  * 
  * export const options = {
     stages: [
@@ -19,7 +18,7 @@ import { BASE_URL, GET_PROFILES_EP } from '../urls-eps.js'
             target: 1000
         },
         {
-            duration: '50m',
+            duration: '12h',
             target: 1000
         },
         {
@@ -34,11 +33,11 @@ export const options = {
     stages: [
         {
             duration: '30s',
-            target: 100
+            target: 200
         },
         {
             duration: '1m',
-            target: 100
+            target: 200
         },
         {
             duration: '30s',
