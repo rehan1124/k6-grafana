@@ -23,8 +23,12 @@ Horizontal scaling (scale-out) -> Adding more systems to handle load, mostly wit
 
 ## Types of Performance Testing
 
-1) Load Test: Simulating multiple users accesing the system concurrently
-2) Stress Test: Push the system to its breaking point
+1) Load Test: Simulating multiple users accesing the system concurrently. Number of users accessing the system in
+busiest time of the day. Tests could last for 30 mins or more depending on requirements. Gradual increase users and
+decrease as test end time approaches.
+Ramp-up can be 10% of total test duration. Same with Ramp-down. Remaining time for Steady-load.
+2) Stress Test: Push the system to its breaking point. Higher than Load Tests. Heavier than usual loads.
+Increased VUs, mimicking real world rush hours or surge situations.
 3) Spike Test: Sudden increase and decrease of load
 4) Smoke Test: System is up and running and script we have written is also working. Checks basic functionality.
 
