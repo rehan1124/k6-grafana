@@ -1,51 +1,136 @@
-# [k6-grafana](https://k6.io/)
+# k6 + Grafana Performance Testing Suite
 
-k6 and Grafana
+This repository contains a structured collection of performance testing scripts using **k6**, along with support for visualization and analysis via **Grafana**.  
+It includes examples covering all major performance testing types, along with best practices, terminology, and execution guidelines.
 
-## Basic terminologies
+---
 
-1) VUs -> Virtual Users accessing application
-2) Latency: Time taken to fullfill the request or Request time + Response time. Also interpreted as delay per request.
-3) Throughput: Requests handled in a given amount of time.
-4) SLO: [Service Level Objective](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
+## 📁 Project Structure
+
+```plaintext
+k6-grafana/
+│
+├── 001-basics/
+├── 002-smoke-test/
+├── 003-load-test/
+├── 004-stress-test/
+├── 005-spike-test/
+├── 006-breakpoint-test/
+├── 006-soak-or-endurance-test/
+├── 007-assertions/
+│
+├── urls-eps.js
+├── package.json
+├── package-lock.json
+├── .env
+└── README.md
 ```
-Example:
-"System will be available 99.8% of the time."
-"90% of the requests took less than 0.5 seconds."
-"95% of the requests took less than 0.9 seconds."
-"99% of the requests took less than 2.5 seconds."
+
+Each folder contains dedicated test scripts demonstrating specific performance-testing concepts.
+
+---
+
+## 📘 Overview
+
+This project helps you:
+
+- Understand the different types of performance testing  
+- Run tests using k6  
+- Analyze test results using Grafana  
+- Learn core performance testing terminology  
+- Build scalable and reliable tests that mimic real-world usage
+
+---
+
+## 📚 Key Terminologies
+
+### **1. VUs (Virtual Users)**
+Simulated users that make requests to your application during a test.
+
+### **2. Latency**
+The total time required to complete a request:
+- Request time + processing time + response time  
+Often interpreted as the **delay per request**.
+
+### **3. Throughput**
+Number of requests your system can handle within a given time.
+
+### **4. SLO (Service Level Objective)**
+A measurable target for system performance.  
+Common examples:
+
 ```
-5) Scalability:
+System will be available 99.8% of the time.
+90% of the requests take < 0.5 seconds.
+95% of the requests take < 0.9 seconds.
+99% of the requests take < 2.5 seconds.
 ```
-Vertical scaling (scale-up) -> Add more RAM memory, storage or use better CPU
-Horizontal scaling (scale-out) -> Adding more systems to handle load, mostly with same config
+
+More reading:  
+https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli
+
+### **5. Scalability**
+
+#### **Vertical Scaling (Scale-Up)**
+Increase CPU, RAM, storage on a single machine.
+
+#### **Horizontal Scaling (Scale-Out)**
+Add more machines with similar configurations to share the load.
+
+---
+
+## 🧪 Types of Performance Tests
+
+### **1) Smoke Test**
+Verifies that:
+- Application is reachable  
+- Test scripts run successfully  
+Used as a “sanity check”.
+
+### **2) Load Test**
+Simulates expected peak daily traffic by gradually increasing VUs and maintaining a stable load.
+- Typically runs for 30+ minutes  
+- Uses ramp-up → steady-load → ramp-down phases
+
+### **3) Stress Test**
+Pushes system beyond normal capacity to find breaking thresholds.
+- Higher VUs than load tests  
+- Represents heavy user spikes or peak-hour surges
+
+### **4) Spike Test**
+Sudden load increase and decrease.
+- Much sharper than stress tests  
+- Helps check system resilience against traffic bursts
+
+### **5) Breakpoint Test**
+Continuously increases load until system fails.
+- Helps determine system capacity limits  
+- Useful for infra planning and auto-scaling strategies
+
+### **6) Soak/Endurance Test**
+Long-duration tests (hours → days) to observe:
+- Memory leaks  
+- Resource exhaustion  
+- Long-term stability under constant load
+
+---
+
+## ▶️ Running Tests
+
+To execute any script from the repository:
+
+```bash
+k6 run ./basics/dev-match-get-api.js
 ```
 
-## Types of Performance Testing
+Replace the file path based on the test you want to run.
 
-1) Smoke Test: System is up and running and script we have written is also working. Checks basic system functionality.
-2) Load Test: Simulating multiple users accesing the system concurrently. Number of users accessing the system in
-busiest time of the day. Tests could last for 30 mins or more depending on requirements. Gradual increase users and
-decrease as test end time approaches.
-Ramp-up can be 10% of total test duration. Same with Ramp-down. Remaining time for Steady-load.
-3) Stress Test: Push the system to its breaking point. Higher than Load Tests. Heavier than usual loads.
-Increased VUs, mimicking real world rush hours or surge situations.
-4) Spike Test: Sudden increase and decrease of load. More load than Stress Test.
-5) Breakpoint Test: Determines point at which system breaks. Gradually keep increasing the load and observe when system
-breaks. Helps with capacity planning.
-6) Soak/Endurance Test: Similar to Load Test but executed for longer durations (Serveral hours to days)
-to observe system behavior over extended period of time.
+---
 
-## How to run tests
+## 🔗 Helpful Reference Links
 
-To run a basic test, execute below command.
+- https://grafana.com/load-testing/types-of-load-testing/
+- https://www.globalapptesting.com/blog/performance-testing-types
+- https://www.browserstack.com/guide/types-of-performance-test
 
-***k6 run ./basics/dev-match-get-api.js***
-
-## More links to refer
-
-https://grafana.com/load-testing/types-of-load-testing/
-
-https://www.globalapptesting.com/blog/performance-testing-types
-
-https://www.browserstack.com/guide/types-of-performance-test
+---
