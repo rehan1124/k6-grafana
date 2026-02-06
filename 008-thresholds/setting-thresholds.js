@@ -1,5 +1,7 @@
 /**
  * Setting up thresholds are good way to achieve SLOs
+ * 
+ * Different metrics type: Counter, Rate, Gauge etc.
  */
 
 import http from 'k6/http';
@@ -10,7 +12,9 @@ export const options = {
     duration: '10s',
     thresholds: {
         http_req_duration: ['p(95)<600'],
-        http_req_failed: ['rate<0.001']
+        http_req_failed: ['rate<0.001'],
+        http_reqs: ['count>32', 'rate>3'],
+        vus: ['value>5']
     }
 }
 
